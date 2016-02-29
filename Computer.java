@@ -30,17 +30,24 @@ public class Computer extends Player implements Runnable {
 				boolean foundValidMove = false;
 				do {
 					Random rnd = new Random();
-					
 					int row = rnd.nextInt(m_board.getm_Board().size());
 					int column = rnd.nextInt(m_board.getm_Board().get(row).size());
-					
 					Tile randomTile = m_board.getm_Board().get(row).get(column);
 				
 					if (!randomTile.isMine()) {
 						foundValidMove = true;
 						m_board.revealTile(row, column);
+						System.out.println("Revealed tile: (" + row + "," + column + ")");
+					} else {
+						System.out.println("Mine found. Looping.");
 					}
 				} while (!foundValidMove);
+				
+				try {
+					Thread.sleep(3000); //Wait 3 seconds
+				} catch (InterruptedException e) {
+					System.err.println("Failed to put thread to sleep.");
+				}
 			}
 		}
 	}
