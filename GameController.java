@@ -43,6 +43,7 @@ public class GameController implements MouseListener, ActionListener {
 	private Player m_player;
 	private Board m_board;
 	private Human m_humanPlayer;
+	private Computer m_computerPlayer;
 
 	private JFrame m_frame;
 	private JPanel m_panelGame;
@@ -84,6 +85,13 @@ public class GameController implements MouseListener, ActionListener {
 		setInfo();
 		startGame();
 		setSound();
+		
+		/*
+		m_computerPlayer = new Computer("AI", m_board);
+		Thread aiThread = new Thread(m_computerPlayer);
+		aiThread.start();
+		m_computerPlayer.toggleAi();
+		*/
 
 		m_time = new Timer(1000, this);
 		m_time.start();
@@ -213,8 +221,10 @@ public class GameController implements MouseListener, ActionListener {
 		if (!(m_board.getm_GameLost())) {
 			
 			if (e.getButton() == MouseEvent.BUTTON1) {
-				
-				m_board.revealTile(e.getX(), e.getY());
+				// Work out the positions in the Array of the mouse click
+				int xPos = (int) Math.floor(e.getX() / Tile.WIDTH);
+				int yPos = (int) Math.floor(e.getY() / Tile.HEIGHT);
+				m_board.revealTile(xPos, yPos);
 				m_panelGame.repaint();
 				m_panelInfo.repaint();
 			} else if (e.getButton() == MouseEvent.BUTTON3) {
