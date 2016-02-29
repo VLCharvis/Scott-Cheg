@@ -33,10 +33,6 @@ public class Computer extends Player implements Runnable {
 					
 					int row = rnd.nextInt(m_board.getm_Board().size());
 					int column = rnd.nextInt(m_board.getm_Board().get(row).size());
-	
-					if (!m_board.getm_Board().get(row).get(column).m_isMine) {
-						m_board.getm_Board().get(row).get(column).setTileType(true, true);
-					}
 					
 					Tile randomTile = m_board.getm_Board().get(row).get(column);
 				
@@ -49,4 +45,3 @@ public class Computer extends Player implements Runnable {
 		}
 	}
 }
-
