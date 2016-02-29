@@ -95,7 +95,7 @@ public class Board {
 			int row = rnd.nextInt(m_board.size());
 			int column = rnd.nextInt(m_board.get(row).size());
 
-			if (m_board.get(row).get(column).m_isMine) {
+			if (m_board.get(row).get(column).isMine()) {
 
 			} else {
 				m_board.get(row).get(column).setTileType(true, true);
@@ -117,14 +117,14 @@ public class Board {
 		int xPos = (int) Math.floor(x / Tile.WIDTH);
 		int yPos = (int) Math.floor(y / Tile.HEIGHT);
 		
-		if (inLimit(yPos, xPos) && !(m_board.get(yPos).get(xPos).m_isDefused)) {
+		if (inLimit(yPos, xPos) && !(m_board.get(yPos).get(xPos).isDefused())) {
 			
-			if (m_board.get(yPos).get(xPos).m_isHidden && !(m_board.get(yPos).get(xPos).m_isMine)) {
+			if (m_board.get(yPos).get(xPos).isHidden() && !(m_board.get(yPos).get(xPos).isMine())) {
 				
 				m_reveal.revealPosition(m_board, yPos, xPos);
 				haveWon();
 				
-			} else if (m_board.get(yPos).get(xPos).m_isMine) {
+			} else if (m_board.get(yPos).get(xPos).isMine()) {
 				
 				this.m_gameWon = false;
 				this.m_gameLost = true;
@@ -132,7 +132,7 @@ public class Board {
 				m_board.get(yPos).add(xPos, new Mine(true, true, false, "images/mineX.jpg"));
 				for (int i = 0; i < m_board.size(); ++i) {
 					for (int j = 0; j < m_board.get(0).size(); ++j) {
-						if (m_board.get(i).get(j).m_isMine && !(i == yPos && j == xPos)) {
+						if (m_board.get(i).get(j).isMine() && !(i == yPos && j == xPos)) {
 							m_board.get(i).remove(j); // create a mine tile
 							m_board.get(i).add(j, new Mine(true, true, false, "images/mine.png"));
 						}
@@ -157,9 +157,9 @@ public class Board {
 		
 		if (inLimit(yPos, xPos)) {
 			
-			boolean isMine = m_board.get(yPos).get(xPos).m_isMine;
-			boolean isDefused = m_board.get(yPos).get(xPos).m_isDefused;
-			boolean isHidden = m_board.get(yPos).get(xPos).m_isHidden;
+			boolean isMine = m_board.get(yPos).get(xPos).isMine();
+			boolean isDefused = m_board.get(yPos).get(xPos).isDefused();
+			boolean isHidden = m_board.get(yPos).get(xPos).isHidden();
 			
 			if (isHidden) {
 				if (!(isDefused)) {
@@ -263,7 +263,7 @@ public class Board {
 		
 		for (int i = 0; i < m_board.size(); ++i) {
 			for (int j = 0; j < m_board.get(0).size(); ++j) {
-				if (!(m_board.get(i).get(j).m_isHidden)) {
+				if (!(m_board.get(i).get(j).isHidden())) {
 					++revealedTile;
 				}
 			}
@@ -280,7 +280,7 @@ public class Board {
 		
 		for (int i = 0; i < m_board.size(); ++i) {
 			for (int j = 0; j < m_board.get(0).size(); ++j) {
-				if (m_board.get(i).get(j).m_isHidden) {
+				if (m_board.get(i).get(j).isHidden()) {
 					++hiddenTile;
 				}
 			}
@@ -297,7 +297,7 @@ public class Board {
 		
 		for (int i = 0; i < m_board.size(); ++i) {
 			for (int j = 0; j < m_board.get(0).size(); ++j) {
-				if (m_board.get(i).get(j).m_isDefused && m_board.get(i).get(j).m_isMine) {
+				if (m_board.get(i).get(j).isDefused() && m_board.get(i).get(j).isMine()) {
 					++defusedTile;
 				}
 			}
