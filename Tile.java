@@ -15,9 +15,9 @@ public abstract class Tile {
 	public static final int WIDTH = 30;
 	public static final int HEIGHT = 30;
 
-	protected boolean m_isMine = false;
-	protected boolean m_isHidden = false;
-	protected boolean m_isDefused = false;
+	private boolean m_isMine = false;
+	private boolean m_isHidden = false;
+	private boolean m_isDefused = false;
 	
 	/**
 	 * Tile Constructor
