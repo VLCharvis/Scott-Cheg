@@ -113,26 +113,24 @@ public class Board {
 	 * @param y an int which is the Y position of the click
 	 */
 	public void revealTile(int x, int y) {
-		// Work out the positions in the Array of the mouse click
-		int xPos = (int) Math.floor(x / Tile.WIDTH);
-		int yPos = (int) Math.floor(y / Tile.HEIGHT);
 		
-		if (inLimit(yPos, xPos) && !(m_board.get(yPos).get(xPos).isDefused())) {
+		
+		if (inLimit(y, x) && !(m_board.get(y).get(x).isDefused())) {
 			
-			if (m_board.get(yPos).get(xPos).isHidden() && !(m_board.get(yPos).get(xPos).isMine())) {
+			if (m_board.get(y).get(x).isHidden() && !(m_board.get(y).get(x).isMine())) {
 				
-				m_reveal.revealPosition(m_board, yPos, xPos);
+				m_reveal.revealPosition(m_board, y, x);
 				haveWon();
 				
-			} else if (m_board.get(yPos).get(xPos).isMine()) {
+			} else if (m_board.get(y).get(x).isMine()) {
 				
 				this.m_gameWon = false;
 				this.m_gameLost = true;
-				m_board.get(yPos).remove(xPos); // create a mine tile
-				m_board.get(yPos).add(xPos, new Mine(true, true, false, "images/mineX.jpg"));
+				m_board.get(y).remove(x); // create a mine tile
+				m_board.get(y).add(x, new Mine(true, true, false, "images/mineX.jpg"));
 				for (int i = 0; i < m_board.size(); ++i) {
 					for (int j = 0; j < m_board.get(0).size(); ++j) {
-						if (m_board.get(i).get(j).isMine() && !(i == yPos && j == xPos)) {
+						if (m_board.get(i).get(j).isMine() && !(i == y && j == x)) {
 							m_board.get(i).remove(j); // create a mine tile
 							m_board.get(i).add(j, new Mine(true, true, false, "images/mine.png"));
 						}
