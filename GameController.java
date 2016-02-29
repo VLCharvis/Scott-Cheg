@@ -1,7 +1,7 @@
 /**
  * @file GameController.java
- * @author Peter Jenkins
- * @date 7 December 2015
+ * @author A4 Peter Jenkins, A5 Thomas Fisher, Victoria Charvis
+ * @date 29 February 2016
  *
  * Controls the flow of the game takes the
  * click of the user and passes the position
@@ -61,6 +61,14 @@ public class GameController implements MouseListener, ActionListener {
 	private JMenuItem m_exit;
 	private JMenuItem m_about;
 	private JMenuItem m_instructions;
+	private JMenu m_loadGame;
+	private JMenuItem m_loadSlot1;
+	private JMenuItem m_loadSlot2;
+	private JMenuItem m_loadSlot3;
+	private JMenu m_saveGame;
+	private JMenuItem m_saveSlot1;
+	private JMenuItem m_saveSlot2;
+	private JMenuItem m_saveSlot3;
 
 	private Clip m_tick;
 	private Clip m_bomb;
@@ -255,9 +263,11 @@ public class GameController implements MouseListener, ActionListener {
 	}
 
 	/**
-	 * Builds a JMenuBar with options
+	 * Builds a JMenuBar with options 
 	 * 
 	 * @return - a JMenuBar Object
+	 * @see Tony Gaddis and Godfrey Muganda, chapter 13.8,page 813 
+	 * from "Starting out with Java from control structures through data structures, 1st edition
 	 */
 	private JMenuBar myMenu() {
 		JMenuBar menu = new JMenuBar();
@@ -270,10 +280,37 @@ public class GameController implements MouseListener, ActionListener {
 		m_exit = new JMenuItem("Exit");
 		m_exit.addActionListener(this);
 		
+		m_loadGame = new JMenu("Load Game");
+		m_loadSlot1 = new JMenuItem("Slot 1");
+		m_loadSlot1.addActionListener(this);
+		m_loadSlot2 = new JMenuItem("Slot 2");
+		m_loadSlot2.addActionListener(this);
+		m_loadSlot3 = new JMenuItem("Slot 3");
+		m_loadSlot3.addActionListener(this);
+		
+		m_saveGame = new JMenu("Save Game");
+		m_saveGame.addActionListener(this);
+		m_saveSlot1 = new JMenuItem("Slot 1");
+		m_saveSlot1.addActionListener(this);
+		m_saveSlot2 = new JMenuItem("Slot 2");
+		m_saveSlot2.addActionListener(this);
+		m_saveSlot3 = new JMenuItem("Slot 3");
+		m_saveSlot3.addActionListener(this);
+		
+		m_loadGame.add(m_loadSlot1);
+		m_loadGame.add(m_loadSlot2);
+		m_loadGame.add(m_loadSlot3);
+		
+		m_saveGame.add(m_saveSlot1);
+		m_saveGame.add(m_saveSlot2);
+		m_saveGame.add(m_saveSlot3);
+		
 		game.add(m_newGame);
+		game.add(m_saveGame);
+		game.add(m_loadGame);
 		game.add(m_settings);
 		game.add(m_exit);
-		
+				
 		JMenu help = new JMenu("Help");
 		
 		m_about = new JMenuItem("About");
@@ -355,6 +392,24 @@ public class GameController implements MouseListener, ActionListener {
 
 		} else if (event.getSource() == m_GameFinshed) {
 			reset();
+		} else if (event.getSource() == m_loadSlot1) {
+			
+			System.out.println("Slot 1 selected");
+		} else if (event.getSource() == m_loadSlot2) {
+			
+			System.out.println("Slot 2 selected");
+		} else if (event.getSource() == m_loadSlot3) {
+			
+			System.out.println("Slot 3 selected");
+		} else if (event.getSource() == m_saveSlot1) {
+			
+			System.out.println("Slot 1 save");
+		} else if (event.getSource() == m_saveSlot2) {
+			
+			System.out.println("Slot 2 save");
+		} else if (event.getSource() == m_saveSlot3) {
+			
+			System.out.println("Slot 3 save");
 		}
 	}
 
