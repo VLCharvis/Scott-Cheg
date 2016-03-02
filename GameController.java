@@ -44,7 +44,8 @@ public class GameController implements MouseListener, ActionListener {
 	private Board m_board;
 	private Human m_humanPlayer;
 	private Computer m_computerPlayer;
-
+	private SavedFile m_savedFile;
+	
 	private JFrame m_frame;
 	private JPanel m_panelGame;
 	private JPanel m_panelInfo;
@@ -333,6 +334,7 @@ public class GameController implements MouseListener, ActionListener {
 	 * @param event an ActionEvent describing what happened
 	 */
 	public void actionPerformed(ActionEvent event) {
+		m_savedFile = new SavedFile();
 		if (event.getSource() == m_time) {
 			m_panelInfo.repaint();
 			m_secoundPlayed += m_time.getDelay() / 1000;
@@ -393,23 +395,22 @@ public class GameController implements MouseListener, ActionListener {
 		} else if (event.getSource() == m_GameFinshed) {
 			reset();
 		} else if (event.getSource() == m_loadSlot1) {
-			
 			System.out.println("Slot 1 selected");
-		} else if (event.getSource() == m_loadSlot2) {
+		} else if (event.getSource() == m_loadSlot2) {//slot, board, player, menu
 			
 			System.out.println("Slot 2 selected");
 		} else if (event.getSource() == m_loadSlot3) {
 			
 			System.out.println("Slot 3 selected");
 		} else if (event.getSource() == m_saveSlot1) {
-			
-			System.out.println("Slot 1 save");
+			//pass in slot no.and board
+			m_savedFile.saveFile(1,m_board,m_player);
 		} else if (event.getSource() == m_saveSlot2) {
-			
-			System.out.println("Slot 2 save");
+			//pass in slot no. and board
+			m_savedFile.saveFile(2,m_board,m_player);
 		} else if (event.getSource() == m_saveSlot3) {
-			
-			System.out.println("Slot 3 save");
+			//pass in slot no. and board
+			m_savedFile.saveFile(3,m_board,m_player);
 		}
 	}
 
