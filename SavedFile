@@ -1,0 +1,80 @@
+/**
+ * @file SavedFile.java
+ * @author Victoria Charvis
+ * @date 29th Febuary 2016
+ * @brief saves current game
+ * 
+ * Saves the current game into the CSV designted file
+ * 
+ *  @see Tony Gaddis and Godfrey Muganda, chapter 4.10
+ * from "Starting out with Java from control structures through data structures, 1st edition
+ */
+
+package game;
+
+import java.util.*;
+import java.io.FileNotFoundException;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
+public class SavedFile {
+	
+	private String m_fileName;
+		
+	private String getFileName() {
+		return m_fileName;
+	}
+	
+	private void setFileName(int slot) {
+		m_fileName=("SaveFile" + slot + ".csv");
+	}
+	
+	public void saveFile(int slot, Board board, Player player) {
+		setFileName(slot);
+		try {
+			//Setup connection to the file
+			FileWriter writer = new FileWriter(getFileName());
+			PrintWriter output = new PrintWriter(writer);
+			
+			//Saving player name, time passed, diffused tile amount, total mines, hidden tile amount, revealed tiles amount
+			output.print(player.getUsername()+",");
+			output.print(board.getTimePassed()+",");
+			output.print(board.getDefusedTile()+",");
+			output.print(board.getMineCount()+",");
+			output.print(board.getHiddenTile()+",");
+			output.print(board.getRevealedTile()+",");
+			
+			//saving tile data
+			ArrayList<ArrayList<Tile>> boardData = new ArrayList<ArrayList<Tile>>();
+			boardData = board.getm_Board();
+			int tileAmount = boardData.size();
+			//save board size
+			output.print(tileAmount+",");
+			//for every tile record if it's revealed, hidden, diffused, mined by True/False
+			for (int i=0; i<tileAmount; i++) {
+				for (int j=0; j<tileAmount; j++) {
+					if (boardData.get(i).get(j).isDefused()) {
+						output.print("T");
+					} else {
+						output.print("F");
+					}
+					if (boardData.get(i).get(j).isMine()) {
+						output.print("T");
+					} else {
+						output.print("F");
+					}
+					if (boardData.get(i).get(j).isHidden()) {
+						output.print("T,");
+					} else {
+						output.print("F,");
+					}
+				}
+			}
+			
+			output.close();
+		}
+		
+		catch (Exception e) {}
+	}
+}
