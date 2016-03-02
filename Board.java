@@ -1,6 +1,6 @@
 /**
  * @file Board.java
- * @author Ethan Davies
+ * @author A4 Ethan Davies A5 Victoria Charvis
  * @date 7 December 2015
  *
  * Contain the Information of the current Board
@@ -24,7 +24,8 @@ public class Board {
 	private boolean m_gameLost = false;
 	private ArrayList<ArrayList<Tile>> m_board;
 	private Revealed m_reveal;
-
+	private String m_timePassed;
+	
 	/**
 	 * Constructor
 	 * 
@@ -67,6 +68,29 @@ public class Board {
 		return m_gameWon;
 	}
 
+	/**
+	 * Gets the time passed
+	 */
+	public String getTimePassed() {
+		return m_timePassed;
+	}
+	
+	/**
+	 * Gets the mine count
+	 */
+	public int getMineCount() {
+		return m_mineCount;
+	}
+	
+	/**
+	 * Sets the time passed
+	 * 
+	 * @param time time elapsed in current game
+	 */
+	private void setTimePassed(String time) {
+		m_timePassed = time;
+	}
+	
 	/**
 	 * Sets the dimensions of the board
 	 */
@@ -225,6 +249,7 @@ public class Board {
 			g.drawString("Time : 00:00:00", x, y);
 		} else {
 			g.drawString("Time :" + timePassed, x, y);
+			setTimePassed(timePassed);
 		}
 		
 		x = 1;
@@ -256,7 +281,7 @@ public class Board {
 	/**
 	 * @return a int with the number of revealed tiles
 	 */
-	private int getRevealedTile() {
+	public int getRevealedTile() {
 		int revealedTile = 0;
 		
 		for (int i = 0; i < m_board.size(); ++i) {
@@ -271,9 +296,9 @@ public class Board {
 	}
 
 	/**
-	 * @returna int with the number of hidden tiles
+	 * @return a int with the number of hidden tiles
 	 */
-	private int getHiddenTile() {
+	public int getHiddenTile() {
 		int hiddenTile = 0;
 		
 		for (int i = 0; i < m_board.size(); ++i) {
@@ -290,7 +315,7 @@ public class Board {
 	/**
 	 * @return a int with the number of defused tiles
 	 */
-	private int getDefusedTile() {
+	public int getDefusedTile() {
 		int defusedTile = 0;
 		
 		for (int i = 0; i < m_board.size(); ++i) {
