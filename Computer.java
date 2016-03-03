@@ -13,15 +13,17 @@ import java.util.Random;
 public class Computer extends Player implements Runnable {
 	private boolean m_aiToggled = false;
 	private Board m_board;
+	private GameController m_gameController;
 	
 	public boolean toggleAi() {
 		m_aiToggled = !m_aiToggled;
 		return m_aiToggled;
 	}
 	
-	public Computer(String name, Board board) {
+	public Computer(String name, Board board, GameController gc) {
 		super(name);
 		m_board = board;
+		m_gameController = gc;
 	}
 	
 	public void run() {
@@ -37,6 +39,7 @@ public class Computer extends Player implements Runnable {
 					if (!randomTile.isMine()) {
 						foundValidMove = true;
 						m_board.revealTile(row, column);
+						m_gameController.repaintAll();
 						System.out.println("Revealed tile: (" + row + "," + column + ")");
 					} else {
 						System.out.println("Mine found. Looping.");
