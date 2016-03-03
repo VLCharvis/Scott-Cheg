@@ -14,6 +14,7 @@ public class Computer extends Player implements Runnable {
 	private boolean m_aiToggled = false;
 	private Board m_board;
 	private GameController m_gameController;
+	private final int SLEEP_TIME = 500;
 	
 	public boolean toggleAi() {
 		m_aiToggled = !m_aiToggled;
@@ -36,18 +37,18 @@ public class Computer extends Player implements Runnable {
 					int column = rnd.nextInt(m_board.getm_Board().get(row).size());
 					Tile randomTile = m_board.getm_Board().get(row).get(column);
 				
-					if (!randomTile.isMine()) {
+					if (!randomTile.isMine() && randomTile.isHidden()) {
 						foundValidMove = true;
 						m_board.revealTile(row, column);
 						m_gameController.repaintAll();
 						System.out.println("Revealed tile: (" + row + "," + column + ")");
 					} else {
-						System.out.println("Mine found. Looping.");
+						System.out.println("Mine or already revealed tile found. Looping.");
 					}
 				} while (!foundValidMove);
 				
 				try {
-					Thread.sleep(3000); //Wait 3 seconds
+					Thread.sleep(SLEEP_TIME); //Wait 3 seconds
 				} catch (InterruptedException e) {
 					System.err.println("Failed to put thread to sleep.");
 				}
