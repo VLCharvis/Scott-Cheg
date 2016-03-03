@@ -15,6 +15,7 @@ public class Computer extends Player implements Runnable {
 	private Board m_board;
 	private GameController m_gameController;
 	private final int SLEEP_TIME = 500;
+	private Point[] m_currentPoint;
 	
 	public boolean toggleAi() {
 		m_aiToggled = !m_aiToggled;
@@ -25,6 +26,20 @@ public class Computer extends Player implements Runnable {
 		super(name);
 		m_board = board;
 		m_gameController = gc;
+	}
+	
+	public boolean isValidPoint(Board board,int x, int y) {
+		boolean flag = false;
+		m_currentPoint[0].setPoint(x, y);
+		for (int i = 0; i < board.getm_validPoints().length; i++) {
+			if (board.getm_validPoints()[i] == m_currentPoint[0]) {
+				break;
+			} else if (board.getm_validPoints()[i] != m_currentPoint[0]) {
+				flag = true;
+				break;
+			}
+		}
+		return flag;
 	}
 	
 	public void run() {
