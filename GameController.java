@@ -74,6 +74,8 @@ public class GameController implements MouseListener, ActionListener {
 	private Clip m_tick;
 	private Clip m_bomb;
 	private Clip m_won;
+	
+	private boolean m_test = true;
 
 	/**
 	 * Constructor
@@ -95,12 +97,12 @@ public class GameController implements MouseListener, ActionListener {
 		startGame();
 		setSound();
 		
-		/*
-		m_computerPlayer = new Computer("AI", m_board);
-		Thread aiThread = new Thread(m_computerPlayer);
-		aiThread.start();
-		m_computerPlayer.toggleAi();
-		*/
+		if (m_test) {
+			m_computerPlayer = new Computer("AI", m_board, this);
+			Thread aiThread = new Thread(m_computerPlayer);
+			aiThread.start();
+			m_computerPlayer.toggleAi();
+		}
 
 		m_time = new Timer(1000, this);
 		m_time.start();
@@ -458,5 +460,9 @@ public class GameController implements MouseListener, ActionListener {
 		m_time.start();
 		m_tick.loop(Clip.LOOP_CONTINUOUSLY);
 	}
-
+	
+	public void repaintAll() {
+		m_panelGame.repaint();
+		m_panelInfo.repaint();
+	}
 }
