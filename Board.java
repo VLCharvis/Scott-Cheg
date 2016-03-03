@@ -25,7 +25,7 @@ public class Board {
 	private ArrayList<ArrayList<Tile>> m_board;
 	private Revealed m_reveal;
 	private String m_timePassed;
-	
+	private Point[] m_validPoints;
 	/**
 	 * Constructor
 	 * 
@@ -60,6 +60,10 @@ public class Board {
 	public ArrayList<ArrayList<Tile>> getm_Board() {
 		return m_board;
 	}
+	
+	public Point[] getm_validPoints() {
+		return m_validPoints;
+	}
 
 	/**
 	 * @return the value of m_gameWon which is true if the game is won
@@ -89,6 +93,13 @@ public class Board {
 	 */
 	private void setTimePassed(String time) {
 		m_timePassed = time;
+	}
+	
+	
+	private void addValidPosition(int x, int y) {
+		for (int i = 0; i<m_validPoints.length; i++) {
+			m_validPoints[i].setPoint(x,y);
+		}
 	}
 	
 	/**
@@ -144,6 +155,7 @@ public class Board {
 			if (m_board.get(y).get(x).isHidden() && !(m_board.get(y).get(x).isMine())) {
 				
 				m_reveal.revealPosition(m_board, y, x);
+				addValidPosition(x,y);
 				haveWon();
 				
 			} else if (m_board.get(y).get(x).isMine()) {
