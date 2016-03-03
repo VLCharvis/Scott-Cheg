@@ -155,7 +155,7 @@ public class Board {
 			if (m_board.get(y).get(x).isHidden() && !(m_board.get(y).get(x).isMine())) {
 				
 				m_reveal.revealPosition(m_board, y, x);
-				addValidPosition(x,y);
+				//addValidPosition(x,y);
 				haveWon();
 				
 			} else if (m_board.get(y).get(x).isMine()) {
