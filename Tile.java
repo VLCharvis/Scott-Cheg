@@ -34,21 +34,21 @@ public abstract class Tile {
 	/**
 	 * @return isMine which is true if the tile is a mine 
 	 */
-	protected boolean isMine() {
+	public boolean isMine() {
 		return m_isMine;
 	}
 	
 	/**
 	 * @return isMine which is true if the tile is a mine 
 	 */
-	protected boolean isHidden() {
+	public boolean isHidden() {
 		return m_isHidden;
 	}
 	
 	/**
 	 * @return isMine which is true if the tile is a mine 
 	 */
-	protected boolean isDefused() {
+	public boolean isDefused() {
 		return m_isDefused;
 	}
 	
@@ -58,7 +58,7 @@ public abstract class Tile {
 	 * @param isMine a boolean for if its a mine
 	 * @param isHidden a boolean for if it is hidden
 	 */
-	protected void setTileType(boolean isMine, boolean isHidden) {
+	public void setTileType(boolean isMine, boolean isHidden) {
 		this.m_isMine = isMine;
 		this.m_isHidden = isHidden;
 	}
