@@ -29,7 +29,6 @@ public class Revealed extends Tile {
 	public Revealed(boolean isMine, boolean isHidden, boolean isDefused) {
 		// Always set hidden to false as its the revealed tile.
 		super(isMine, false, isDefused);
-
 		m_revealedImage = new ImageIcon("images/revealed.png");
 	}
 
@@ -71,7 +70,7 @@ public class Revealed extends Tile {
 	 * @param tileArround an ArrayList of tiles that are around the tile
 	 */
 	private int calculateNearbyMines(Tile tile, ArrayList<Tile> tileArround) {
-		if (tile.m_isMine) {
+		if (tile.isMine()) {
 			m_nearbyMines = -1;
 		} else {
 			int nearbyMine = 0;
@@ -137,7 +136,7 @@ public class Revealed extends Tile {
 				|| j < 0 
 				|| i >= board.size() 
 				|| j >= board.get(0).size() 
-				|| !(board.get(i).get(j).m_isHidden)) {
+				|| !(board.get(i).get(j).isHidden())) {
 			// Escape if true
 			return;
 		}
